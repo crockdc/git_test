@@ -10,13 +10,13 @@ public class MoocMethods {
 
 	public static void main(String[] args) {
 // EXERCISE: Advanced Astrology
-		printSquare(5);
+		printSquare(10);
 		System.out.println();
 		printRectangle(3, 12);
 		System.out.println();
-		printTriangle(5);
+		printTriangle(9);
 		System.out.println();
-		printChristmasTree(20);
+		printChristmasTree(10);
 	}
 	public static void printChristmasTree(int height) {
 		int treeBaseCounter = 0;
@@ -25,9 +25,9 @@ public class MoocMethods {
 			printStars((i*2)-1);
 			treeBaseCounter = i*2;
 		}
-		printSpaces((treeBaseCounter/2)-3);
+		printSpaces((treeBaseCounter/2)-2);
 		printStars(3);
-		printSpaces((treeBaseCounter/2)-3);
+		printSpaces((treeBaseCounter/2)-2);
 		printStars(3);
 	}
 	public static void printTriangle(int size) {

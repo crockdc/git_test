@@ -33,6 +33,7 @@ public class MoocPart3_2 {
 	public static void oldest(String string) {
 		
 	}
+	MoocPart3_2 mooc = new MoocPart3_2();
 }
 
 //========================================================================

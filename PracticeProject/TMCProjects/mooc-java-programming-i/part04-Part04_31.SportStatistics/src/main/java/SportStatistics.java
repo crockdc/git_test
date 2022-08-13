@@ -7,45 +7,47 @@ public class SportStatistics {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+
         System.out.println("File:");
-        try (Scanner fileReader = new Scanner(Paths.get(scan.nextLine()))) {
-            System.out.println("Team:");
-            String inputTeam = scan.nextLine();
-            int gameCount = 0;
-            int wins = 0;
-            int losses = 0;
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
+        String fileName = scan.nextLine();
+        ArrayList<Game> gamesList = readFromFile(fileName);
+
+        System.out.println("Team:");
+        String teamInput = scan.nextLine();
+
+        ArrayList<Game> games = new ArrayList<>();
+        for (Game game: gamesList) {
+            if (teamInput.equals(game.getHomeTeam()) || teamInput.equals(game.getAwayTeam())) {
+                games.add(game);
+            }
+        }
+
+
+
+    }
+
+    public static ArrayList<Game> readFromFile(String fileName) {
+        ArrayList<Game> games = new ArrayList<>();
+
+        try (Scanner read = new Scanner(Paths.get(fileName))){
+            while (read.hasNextLine()) {
+                String line = read.nextLine();
+                if (line.isEmpty()) {
+                    continue;
+                }
+
                 String[] parts = line.split(",");
                 String homeTeam = parts[0];
                 String awayTeam = parts[1];
                 int homePoints = Integer.valueOf(parts[2]);
                 int awayPoints = Integer.valueOf(parts[3]);
-                if (inputTeam.equals(homeTeam)) {
-                    gameCount++;
-                    if (homePoints > awayPoints) {
-                        wins++;
-                    } else {
-                        losses++;
-                    }
-                } else if (inputTeam.equals(awayTeam)) {
-                    gameCount++;
-                    if (homePoints > awayPoints) {
-                        losses++;
-                    } else {
-                        wins++;
-                    }
-                }
-
+                games.add(new Game(homeTeam, awayTeam, homePoints, awayPoints));
             }
-            System.out.println("Games: " + gameCount);
-            System.out.println("Wins: " + wins);
-            System.out.println("Losses: " + losses);
-
         } catch (Exception e) {
-            System.out.println("Error, file not found.");
+            System.out.println("Error, retry.");
         }
-    }
 
+        return games;
+
+    }
 }
